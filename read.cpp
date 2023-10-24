@@ -21,7 +21,7 @@ Vector readandconv(std::string line)
 std::vector<Triangle> readfile()
 {
 	std::vector<Triangle> tri;
-	std::ifstream inputFile("teapot.txt");
+	std::ifstream inputFile("part.txt");
 	std::string line, str;
 	uint size;
 	if (!inputFile) {

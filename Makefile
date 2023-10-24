@@ -27,10 +27,10 @@ $(OBJDIR)/%.o: %.cpp
 
 
 $(NAME): $(OBJS) Makefile
-	$(CXX) $(CXXFLAGS) $(LIBS) $(OBJS) -o $(NAME)
+	$(CXX) $(CXXFLAGS)  $(OBJS) -o $(NAME) $(LIBS)
 
 $(NAMEDEBUG): $(OBJS) $(HEADERS)
-	$(CXX) $(CXXFLAGS) $(LIBS) -O0 $(OBJS) -o $(NAMEDEBUG)
+	$(CXX) $(CXXFLAGS) -O0 $(OBJS) -o $(NAMEDEBUG) $(LIBS)
 
 run : $(NAME)
 	./$(NAME)

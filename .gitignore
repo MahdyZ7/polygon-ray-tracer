@@ -1,2 +1,4 @@
-obj/8
+obj/*
 .ccls-cache
+.vscode
+.breakpoint

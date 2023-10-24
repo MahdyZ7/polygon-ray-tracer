@@ -7,24 +7,24 @@ void hardcoded_data(Data &data)
 	data.cam.orientation =Vector(0, 0, 1);
 	data.cam.fov = 60;
 
-	// data.triangles = readfile();
+	data.triangles = readfile();
 	
 }
 
-std::vector<Triangle> add_tri()
-{
-	std::vector<Triangle> triangles;
-	Triangle T;
+// std::vector<Triangle> add_tri()
+// {
+// 	std::vector<Triangle> triangles;
+// 	Triangle T;
 	
-	T.p0 = Vector(0, 0, 0);
-	T.p1 = Vector(0, 1, 0);
-	T.p2 = Vector(1, 0, 0);
-	std::cout << "triangle is " << T.p0 << " " << T.p1 << " " << T.p2 << std::endl;
-	// triangles.push_back(T);
-	// std::cout << "triangle is " << triangles[0].p0 << " " << triangles[0].p1 << " " << triangles[0].p2 << std::endl;
-	std::cout << "triangle = " << triangles.size() << std::endl;
-	return triangles;
-}
+// 	T.p0 = Vector(0, 0, 0);
+// 	T.p1 = Vector(0, 1, 0);
+// 	T.p2 = Vector(1, 0, 0);
+// 	std::cout << "triangle is " << T.p0 << " " << T.p1 << " " << T.p2 << std::endl;
+// 	// triangles.push_back(T);
+// 	// std::cout << "triangle is " << triangles[0].p0 << " " << triangles[0].p1 << " " << triangles[0].p2 << std::endl;
+// 	std::cout << "triangle = " << triangles.size() << std::endl;
+// 	return triangles;
+// }
 
 void init_data(Data &data)
 {
@@ -42,9 +42,9 @@ void init_data(Data &data)
 	data.kit.angle = tan(M_PI * 0.5 * data.cam.fov / 180.);
 	// data.kit.color = 0;
 
-	for (int x = 0; x <= WIN_WIDTH; x++)
+	for (int x = 0; x < WIN_WIDTH; x++)
 	{
-		for (int y = 0; y <= WIN_HIGHT; y++)
+		for (int y = 0; y < WIN_HIGHT; y++)
 		{
 			float x_ = (2 * ((x + 0.5) * data.kit.invwidth) - 1) 
 				* data.kit.angle * data.kit.aspectratio;
@@ -75,7 +75,7 @@ int main() {
 	// Create a window
 	sf::RenderWindow window(sf::VideoMode(WIN_WIDTH, WIN_HIGHT), "raytracing");
 	window.setKeyRepeatEnabled(false);
-    sf::Uint8* pixels = new sf::Uint8[WIN_WIDTH * WIN_HIGHT * 4]; // pixels for an 800x600 image, with 4 components per pixel (RGBA)
+    // sf::Uint8* pixels = new sf::Uint8[WIN_WIDTH * WIN_HIGHT * 4]; // pixels for an 800x600 image, with 4 components per pixel (RGBA)
     sf::Texture texture;
     texture.create(WIN_WIDTH, WIN_HIGHT);
     
@@ -92,7 +92,7 @@ int main() {
 	Data dt;
 	hardcoded_data(dt);
 	init_data(dt);
-	dt.triangles = add_tri();
+	// dt.triangles = add_tri();
 	// raytracing_loop;
 	std::cout << "triangle = " << dt.triangles.size() << std::endl;
 	std::cout << "triangle is " << dt.triangles[0].p0 << " " << dt.triangles[0].p1 << " " << dt.triangles[0].p2 << std::endl;
@@ -107,8 +107,8 @@ int main() {
 			dt.pixels[i * WIN_WIDTH * 4 + j * 4 + 2] = color.z;
 		}
 	}
-	exit(1);
 	std::cout << "output is ready";
+	sf::Uint8* pixels = dt.pixels;
     texture.update(pixels);
     sf::Sprite sprite(texture);
 	// Main loop
@@ -133,6 +133,5 @@ int main() {
 		window.display();
 	}
 
-    delete[] pixels;
 	return 0;
 }
