@@ -71,67 +71,90 @@ void key_press(sf::RenderWindow *window)
 		window->close();
 }
 
-int main() {
-	// Create a window
-	sf::RenderWindow window(sf::VideoMode(WIN_WIDTH, WIN_HIGHT), "raytracing");
-	window.setKeyRepeatEnabled(false);
-    // sf::Uint8* pixels = new sf::Uint8[WIN_WIDTH * WIN_HIGHT * 4]; // pixels for an 800x600 image, with 4 components per pixel (RGBA)
-    sf::Texture texture;
-    texture.create(WIN_WIDTH, WIN_HIGHT);
+// int main() {
+// 	// Create a window
+// 	sf::RenderWindow window(sf::VideoMode(WIN_WIDTH, WIN_HIGHT), "raytracing");
+// 	window.setKeyRepeatEnabled(false);
+//     // sf::Uint8* pixels = new sf::Uint8[WIN_WIDTH * WIN_HIGHT * 4]; // pixels for an 800x600 image, with 4 components per pixel (RGBA)
+//     sf::Texture texture;
+//     texture.create(WIN_WIDTH, WIN_HIGHT);
     
-    // Color some pixels
-    // for (int i = 0; i < WIN_WIDTH*WIN_HIGHT*4; i += 4)
-    // {
-    //     pixels[i] = 255;     // Red component
-    //     pixels[i+1] = i%255;     // Green component
-    //     pixels[i+2] = 0;     // Blue component
-    //     pixels[i+3] = 255;   // Alpha (transparency) component 
-    // }
+//     // Color some pixels
+//     // for (int i = 0; i < WIN_WIDTH*WIN_HIGHT*4; i += 4)
+//     // {
+//     //     pixels[i] = 255;     // Red component
+//     //     pixels[i+1] = i%255;     // Green component
+//     //     pixels[i+2] = 0;     // Blue component
+//     //     pixels[i+3] = 255;   // Alpha (transparency) component 
+//     // }
   
-    // Create texture and sprite for displaying the pixels
-	Data dt;
-	hardcoded_data(dt);
-	init_data(dt);
-	// dt.triangles = add_tri();
-	// raytracing_loop;
-	std::cout << "triangle = " << dt.triangles.size() << std::endl;
-	std::cout << "triangle is " << dt.triangles[0].p0 << " " << dt.triangles[0].p1 << " " << dt.triangles[0].p2 << std::endl;
-	for (int i = 0; i < WIN_WIDTH; ++i)
-	{
-		for (int j = 0; j < WIN_HIGHT; ++j)
-		{
-			std::cout << i << " " << j << std::endl;
-			Vector color = trace_tri(dt.dir[i][j],  dt);
-			dt.pixels[i * WIN_WIDTH * 4 + j * 4 + 0] = color.x;
-			dt.pixels[i * WIN_WIDTH * 4 + j * 4 + 1] = color.y;
-			dt.pixels[i * WIN_WIDTH * 4 + j * 4 + 2] = color.z;
-		}
-	}
-	std::cout << "output is ready";
-	sf::Uint8* pixels = dt.pixels;
-    texture.update(pixels);
-    sf::Sprite sprite(texture);
-	// Main loop
-	while (window.isOpen()) {
-		// Event processing
-		sf::Event event;
-		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed) {
-				window.close();
-			}
-			else if (event.type == sf::Event::KeyPressed)
-			{
-				key_press(&window);
-				if (event.key.code == sf::Keyboard::Escape)
-					window.close();
-			}
-		}
-		// Clear window
-		window.clear();		
-		window.draw(sprite);
-		// Show what was drawn
-		window.display();
-	}
+//     // Create texture and sprite for displaying the pixels
+// 	Data dt;
+// 	hardcoded_data(dt);
+// 	init_data(dt);
+// 	// dt.triangles = add_tri();
+// 	// raytracing_loop;
+// 	std::cout << "triangle = " << dt.triangles.size() << std::endl;
+// 	std::cout << "triangle is " << dt.triangles[0].p0 << " " << dt.triangles[0].p1 << " " << dt.triangles[0].p2 << std::endl;
+// 	for (int i = 0; i < WIN_WIDTH; ++i)
+// 	{
+// 		for (int j = 0; j < WIN_HIGHT; ++j)
+// 		{
+// 			std::cout << i << " " << j << std::endl;
+// 			Vector color = trace_tri(dt.dir[i][j],  dt);
+// 			dt.pixels[i * WIN_WIDTH * 4 + j * 4 + 0] = color.x;
+// 			dt.pixels[i * WIN_WIDTH * 4 + j * 4 + 1] = color.y;
+// 			dt.pixels[i * WIN_WIDTH * 4 + j * 4 + 2] = color.z;
+// 		}
+// 	}
+// 	std::cout << "output is ready";
+//     texture.update(dt.pixels);
+//     sf::Sprite sprite(texture);
+// 	// Main loop
+// 	while (window.isOpen()) {
+// 		// Event processing
+// 		sf::Event event;
+// 		while (window.pollEvent(event)) {
+// 			if (event.type == sf::Event::Closed) {
+// 				window.close();
+// 			}
+// 			else if (event.type == sf::Event::KeyPressed)
+// 			{
+// 				key_press(&window);
+// 				if (event.key.code == sf::Keyboard::Escape)
+// 					window.close();
+// 			}
+// 		}
+// 		// Clear window
+// 		window.clear();		
+// 		window.draw(sprite);
+// 		// Show what was drawn
+// 		window.display();
+// 	}
 
-	return 0;
+// 	return 0;
+// }
+
+
+int main()
+{
+    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    sf::CircleShape shape(100.f);
+    shape.setFillColor(sf::Color::Green);
+
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        // window.clear();
+        window.draw(shape);
+        // window.display();
+    }
+
+    return 0;
 }
