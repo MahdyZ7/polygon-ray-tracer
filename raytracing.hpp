@@ -1,8 +1,11 @@
+#ifndef RAYTRACING_HPP
+#define RAYTRACING_HPP
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "vector.hpp"
+#include "Vector.hpp"
+#include "Triangle.hpp"
 #include <vector>
 #include <cstdlib> // For std::rand() and std::srand()
 #include <ctime> // For std::time()
@@ -11,8 +14,8 @@
 #include <ostream>
 
 
-#define WIN_WIDTH 800
-#define WIN_HIGHT 400
+#define WIN_WIDTH 300
+#define WIN_HIGHT 100
 #define SMALL_NUM 0.0001
 
 struct	Data;
@@ -42,15 +45,9 @@ struct Camera
 	Vector	cos_theta;
 };
 
-struct Triangle
-{
-	Vector p0, p1, p2;
-	Vector normal;
-};
-
 struct	Data
 {
-	sf::Uint8				pixels[WIN_WIDTH * WIN_HIGHT * 4];
+	sf::Uint8				*pixels;
 	Vector					dir[WIN_WIDTH][WIN_HIGHT];
 	Camera					cam;
 	RayTraceKit				kit;
@@ -60,3 +57,5 @@ struct	Data
 
 Vector	trace_tri(Vector &dir, Data &data);
 std::vector<Triangle> readfile();
+
+#endif

@@ -1,4 +1,4 @@
-#include "vector.hpp"
+#include "Vector.hpp"
 
 	Vector Vector::operator=(const Vector& other)
 	{
@@ -23,7 +23,7 @@
 	{
 		return Vector(x / s, y / s, z / s);
 	}
-	bool Vector::operator==(Vector v)
+	bool Vector::operator==(const Vector &v) const
 	{
 		return (x == v.x && y == v.y && z == v.z);
 	}

@@ -35,11 +35,11 @@ std::vector<Triangle> readfile()
 			continue;
 		Triangle tl;
 		getline(inputFile, line);
-		tl.p0 = readandconv(line);
+		tl.v0 = readandconv(line);
 		getline(inputFile, line);
-		tl.p1 = readandconv(line);
+		tl.v1 = readandconv(line);
 		getline(inputFile, line);
-		tl.p2 = readandconv(line);
+		tl.v2 = readandconv(line);
 		tri.push_back(tl);
 	}
 

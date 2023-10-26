@@ -1,3 +1,6 @@
+#ifndef VECTOR_HPP
+#define VECTOR_HPP
+
 #include <cmath>
 #include <iostream>
 class Vector {
@@ -19,7 +22,7 @@ class Vector {
 	Vector	operator-(Vector v);
 	Vector	operator*(float s);
 	Vector	operator/(float s);
-	bool	operator==(Vector v);
+	bool	operator==(const Vector &v) const;
 	float length();
 	Vector normalize();
 	float dot(Vector v);
@@ -31,3 +34,5 @@ class Vector {
 };
 
 std::ostream& operator<<(std::ostream& os, const Vector &other);
+
+#endif

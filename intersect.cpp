@@ -7,13 +7,13 @@ float intersect_RayTriangle(Vector &origin, Vector &dir, Triangle &T, Vector &I)
 	float     r, a, b;             // params to calc ray-plane intersect
 
 	// get triangle edge vectors and plane normal
-	u = T.p1 - T.p0;
-	v = T.p2 - T.p0;
+	u = T.v1 - T.v0;
+	v = T.v2 - T.v0;
 	n = Vector::cross(u, v);             // cross product
 	if (n.length() == 0)           // triangle is degenerate
 		return INFINITY;                 // do not deal with this case
 
-	w0 = origin - T.p0;
+	w0 = origin - T.v0;
 	a = -Vector::dot(n,w0);
 	b = Vector::dot(n,dir);
 	if (fabs(b) < SMALL_NUM) {     // ray is parallel to triangle plane
@@ -33,7 +33,7 @@ float intersect_RayTriangle(Vector &origin, Vector &dir, Triangle &T, Vector &I)
 	uu = Vector::dot(u,u);
 	uv = Vector::dot(u,v);
 	vv = Vector::dot(v,v);
-	w = I - T.p0;
+	w = I - T.v0;
 	wu = Vector::dot(w,u);
 	wv = Vector::dot(w,v);
 	D = uv * uv - uu * vv;
@@ -74,7 +74,7 @@ Triangle	*find_closest_tri(
 
 Vector	trace_tri(Vector &dir, Data &data)
 {
-	Vector		color(0,0,0);
+	Vector		color(0,255,0);
 	Vector		hit_pos;
 	Triangle	*closest_tri = NULL;
 	Vector		result;
@@ -87,7 +87,7 @@ Vector	trace_tri(Vector &dir, Data &data)
 		// color = vec_to_color(
 		// 		vec_multiply_two_vectors(&(closest_tri->color), &m));
 		std::srand(std::time(0));
-		color = Vector(255,255,std::rand() % 256);
+		color = Vector(127,0,255);
 	}
 	return (color);
 }
