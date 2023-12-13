@@ -29,8 +29,9 @@ class Vector {
 	Vector cross(Vector v);
 	static float dot(Vector v, Vector w);
 	static Vector cross(Vector v, Vector w);
+	static Vector sNormalize(Vector v);
 	float length2();
-	Vector normalize2();
+	
 };
 
 std::ostream& operator<<(std::ostream& os, const Vector &other);

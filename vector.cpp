@@ -58,11 +58,12 @@
 	{
 		return x * x + y * y + z * z;
 	}
-	Vector Vector::normalize2()
+	Vector Vector::sNormalize(Vector v)
 	{
-		float l = length2();
-		return Vector(x / l, y / l, z / l);
+		float l = v.length();
+		return Vector(v.x / l, v.y / l, v.z / l);
 	}
+	
 
 std::ostream& operator<<(std::ostream& os, const Vector &other)
 {

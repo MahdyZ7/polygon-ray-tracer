@@ -14,7 +14,7 @@
 #include <ostream>
 
 
-#define WIN_WIDTH 300
+#define WIN_WIDTH 150
 #define WIN_HIGHT 100
 #define SMALL_NUM 0.0001
 

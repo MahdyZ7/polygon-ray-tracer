@@ -1,4 +1,5 @@
 obj/*
+raytracing
 .ccls-cache
 .vscode
-.breakpoints
+.break*
