@@ -8,6 +8,7 @@ Triangle Triangle::operator=(const Triangle &other)
 		v1 = other.v1;
 		v2 = other.v2;
 		norm = other.norm;
+		color = other.color;
 	}
 	return *this;
 }

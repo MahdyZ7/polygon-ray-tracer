@@ -1,25 +1,33 @@
 #include "raytracing.hpp"
 
+void add_tri(Data &data)
+{
+	Triangle T(Vector(0, -4, -10), Vector(10, -4, 10), Vector(-10, -4, 10), Vector(0,1,0));
+	Triangle T1(Vector(0, -4, -10), Vector(10, -4, 10), Vector(10, -4, -10), Vector(0,1,0));
+	Triangle T2(Vector(0, -4, -10), Vector(-10, -4, -10), Vector(-10, -4, 10), Vector(0,1,0));
+	Triangle T3(Vector(0, 10, 10), Vector(10, -4, 10), Vector(-10, -4, 10), Vector(0,0,-1));
+	Triangle T4(Vector(0, 10, 10), Vector(10, 10, 10), Vector(10, -4, 10), Vector(0,0,-1));
+	Triangle T5(Vector(0, 10, 10), Vector(-10, -4, 10), Vector(-10, 10, 10), Vector(0,0,-1));
+	data.triangles.push_back(T);
+	data.triangles.push_back(T1);
+	data.triangles.push_back(T2);
+	data.triangles.push_back(T3);
+	data.triangles.push_back(T4);
+	data.triangles.push_back(T5);
+}
+
 void hardcoded_data(Data &data)
 {
-	data.amblight.brightness = 0.6;
-	data.amblight.color = Vector(.80, 1 , 1);
+	data.amblight.brightness = 0.3;
+	data.amblight.color = Vector(0.6, 0.6 , 1);
 	data.spotlight.brightness = 1;
 	data.spotlight.color = Vector(1, 0.5 , 0);
-	data.spotlight.pos = Vector(1, 1, 0.5);
+	data.spotlight.pos = Vector(0, 0, -10);
 	data.triangles = readstl();
+	add_tri(data);
 	// data.triangles = readfile();
 }
 
-void add_tri(Data &data)
-{
-	Triangle T(Vector(0, -4, -5), Vector(10, -4, 10), Vector(-10, 4, 10));
-	Triangle T1(Vector(-5, -4, 10), Vector(0, -4, 10), Vector(5, -4, 10));
-	data.triangles.push_back(T);
-	data.triangles.push_back(T1);
-	std::cout << "triangle is " << T << std::endl;
-	std::cout << "triangle = " << data.triangles.size() << std::endl;
-}
 
 void init_data(Data &data)
 {
@@ -80,22 +88,15 @@ int main() {
 	// raytracing_loop;
 	std::cout << "triangle = " << dt.triangles.size() << std::endl;
 	std::cout << "triangle is " << dt.triangles[0] << std::endl;
-	std::vector<std::thread> threads;
 
 	for (int i = 0; i < WIN_HIGHT; ++i) {
+		std::vector<std::thread> threads;
 		for (int j = 0; j < WIN_WIDTH; ++j) {
-			try {
-				threads.push_back(std::thread(compute_pixel, j, i, std::ref(dt)));
-			}
-				catch (std::system_error &e) {
-					std::cout << "Error: " << e.what() << std::endl;
-					--j;
-				}
+			threads.push_back(std::thread(compute_pixel, i, j, std::ref(dt)));
 		}
 		std::cout << "line: " << i << std::endl;
-	}
-	for (auto &th : threads) {
-	   th.join();
+		for (auto &th : threads)
+			th.join();
 	}
 
 

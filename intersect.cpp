@@ -74,7 +74,7 @@ Triangle	*find_closest_tri(
 
 Vector	trace_tri(Vector &dir, Data &data)
 {
-	Vector		color;
+	Vector		color(255,255,255);
 	Vector		hit_pos;
 	Triangle	*closest_tri = NULL;
 	Vector		result;
@@ -85,9 +85,10 @@ Vector	trace_tri(Vector &dir, Data &data)
 	{
 		mul = compute_color_to_vec(dir, closest_tri, data, hit_pos);
 		// std::cout << "color multiplier: " << mul << std::endl;
-		return (vec_to_color(Vector(255,255,255) , mul));
-		// return (Vector(255,255,255));
 		// std::srand(std::time(0));
+		// color = Vector(rand() % 256, rand() % 256, rand() % 256);
+		return (vec_to_color(closest_tri->color , mul));
+		// return (Vector(255,255,255));
 		// color = Vector(127,0,255);
 	}
 	return (color);

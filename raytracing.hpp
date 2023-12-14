@@ -15,7 +15,7 @@
 #include <ostream>
 
 
-#define WIN_WIDTH 700
+#define WIN_WIDTH 400
 #define WIN_HIGHT 300
 // #define WIN_WIDTH 600
 // #define WIN_HIGHT 400
@@ -25,16 +25,12 @@ struct	Data;
 
 struct RayTraceKit
 {
-	// int		color;
-	// Vector	dir;
 	float	aspectratio;
 	float	invwidth;
 	float	invheight;
 	float	angle;
 	float	new_x;
 	float	new_y;
-	// int		x;
-	// int		y;
 	Vector	int_result;
 };
 

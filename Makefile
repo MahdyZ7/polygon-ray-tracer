@@ -12,10 +12,10 @@ OBJS = $(addprefix $(OBJDIR)/,$(_OBJS))
 
 $(shell mkdir -p $(OBJDIR))
 
-CXX = c++ 
-override CXXFLAGS += -g -Wno-everything -MMD -MP 
+CXX = c++ -Ofast
+override CXXFLAGS += -Wno-everything -MMD -MP  
 
-LIBS = -lsfml-graphics -lsfml-window -lsfml-system -ldl
+LIBS = -lsfml-graphics -lsfml-window -lsfml-system -ldl 
 
 DEPS = $(OBJS:.o=.d)
 
