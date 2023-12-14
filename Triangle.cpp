@@ -7,6 +7,7 @@ Triangle Triangle::operator=(const Triangle &other)
 		v0 = other.v0;
 		v1 = other.v1;
 		v2 = other.v2;
+		norm = other.norm;
 	}
 	return *this;
 }
@@ -18,6 +19,6 @@ bool Triangle::operator==(const Triangle &other) const
 
 std::ostream& operator<<(std::ostream& os, const Triangle &other)
 {
-	os << "(" << other.v0 << ", " << other.v1 << ", " << other.v2 << ")";
+	os << "(" << other.v0 << ", " << other.v1 << ", " << other.v2 << " norm: " << other.norm << ")";
 	return os;
 }

@@ -1,79 +1,45 @@
-// #include "raytracing.hpp"
+#include "raytracing.hpp"
 
-// int	vec_to_color(Vector vec)
-// {
-// 	int	color;
+Vector	vec_to_color(Vector vec, Vector &mul)
+{
+	Vector	color;
 
-// 	color = 0;
-// 	if (vec.x >= 255)
-// 		color += 255 << 16;
-// 	else
-// 		color += (int)(vec.x) << 16 ;
-// 	if (vec.y >= 255)
-// 		color += 255 << 8;
-// 	else
-// 		color += (int)(vec.y) << 8;
-// 	if (vec.z >= 255)
-// 		color += 255;
-// 	else
-// 		color += (int)(vec.z);
-// 	return (color);
-// }
+	if (mul.x > 1)
+		mul.x = 1;
+	if (mul.y > 1)
+		mul.y = 1;
+	if (mul.z > 1)
+		mul.z = 1;
+	color = Vector(vec.x * mul.x, vec.y * mul.y, vec.z * mul.z);
+	return (color);
+}
 
-// float	compute_color(Vector *dir, Triangle *tri, Data *data, float close_t)
-// {
-// 	float	i;
-// 	Vector	normal;
-// 	Vector	hit_point;
-// 	Vector	light_vec;
+void	add_spot_light(
+	Data &data, Vector &normal, Vector &light_vec, Vector &i)
+{
+	i.x += data.spotlight.brightness * data.spotlight.color.x
+		* Vector::dot(normal, light_vec) / (normal.length()
+			* light_vec.length());
+	i.y += data.spotlight.brightness * data.spotlight.color.y
+		* Vector::dot(normal, light_vec) / (normal.length()
+			* light_vec.length());
+	i.z += data.spotlight.brightness * data.spotlight.color.z
+		* Vector::dot(normal, light_vec) / (normal.length()
+			* light_vec.length());
+}
 
-// 	i = 0;
-// 	hit_point = vec_scalar_mult(dir, close_t);
-// 	hit_point = vec_add(&(data->camera.view_point), &hit_point);
-// 	normal = vec_sub(&hit_point, &(tri->center));
-// 	light_vec = vec_sub(&(data->light.pos), &hit_point);
-// 	i += data->amb_light.ratio;
-// 	if (vec_dot(&normal, &light_vec) > 0)
-// 		i += data->light.brightness * vec_dot(&normal, &light_vec)
-// 			/ (vector_magnitude(&normal) * vector_magnitude(&light_vec));
-// 	return (i);
-// }
+Vector	compute_color_to_vec(
+			Vector &dir, Triangle *tri, Data &data, Vector hit_point)
+{
+	Vector	i;
+	Vector	light_vec;
 
-// Vector	compute_color_to_vec(
-// 			Vector *dir, Triangle *tri, Data *data, float close_t)
-// {
-// 	Vector	i;
-// 	Vector	normal;
-// 	Vector	hit_point;
-// 	Vector	light_vec;
+	light_vec = data.spotlight.pos -  hit_point;
+	i =  data.amblight.color * data.amblight.brightness;
+	if (hit_other_object(hit_point, light_vec, data))
+		return (i);
+	if (Vector::dot(tri->norm, light_vec) > 0)
+		add_spot_light(data, tri->norm, light_vec, i);
+	return (i);
+}
 
-// 	fill_single_vector(&i, 0, 0, 0);
-// 	hit_point = vec_scalar_mult(dir, close_t);
-// 	hit_point = vec_add(&(data->camera.view_point), &hit_point);
-// 	normal = vec_sub(&hit_point, &(tri->center));
-// 	light_vec = vec_sub(&(data->light.pos), &hit_point);
-// 	vec_scalar_add(&i, data->amb_light.ratio);
-// 	i.x += data->amb_light.ratio * data->amb_light.color.x;
-// 	i.y += data->amb_light.ratio * data->amb_light.color.y;
-// 	i.z += data->amb_light.ratio * data->amb_light.color.z;
-// 	if (hit_other_object(hit_point, light_vec, data))
-// 		return (i);
-// 	if (vec_dot(&normal, &light_vec) > 0)
-// 		i = add_sphere_spot_light(data, &normal, &light_vec, &i);
-// 	return (i);
-// }
-
-// Vector	add_sphere_spot_light(
-// 	Data *data, Vector *normal, Vector *light_vec, Vector *i)
-// {
-// 	i->x += data->light.brightness * data->light.color.x
-// 		* vec_dot(normal, light_vec) / (vector_magnitude(normal)
-// 			* vector_magnitude(light_vec));
-// 	i->y += data->light.brightness * data->light.color.y
-// 		* vec_dot(normal, light_vec) / (vector_magnitude(normal)
-// 			* vector_magnitude(light_vec));
-// 	i->z += data->light.brightness * data->light.color.z
-// 		* vec_dot(normal, light_vec) / (vector_magnitude(normal)
-// 			* vector_magnitude(light_vec));
-// 	return (*i);
-// }
