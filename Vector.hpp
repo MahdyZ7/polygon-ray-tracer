@@ -12,6 +12,7 @@ class Vector {
 		Fixed z;
 
 	Vector(float x, float y, float z): x(x), y(y), z(z) {}
+	Vector(Fixed x, Fixed y, Fixed z): x(x), y(y), z(z) {}
 	Vector(float x, float y): x(x), y(y), z(0) {}
 	Vector(float x): x(x), y(0), z(0) {}
 	Vector(): x(0), y(0), z(0) {}

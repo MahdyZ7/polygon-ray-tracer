@@ -18,6 +18,9 @@ class Fixed{
 		Fixed operator*(Fixed const &alu) const;
 		Fixed operator/(Fixed const &alu) const;
 
+		Fixed operator+(float const &alu) const;
+		Fixed operator+=(float const &alu);
+
 		Fixed &operator++(); //prefix
 		Fixed operator++(int); //postfix
 		Fixed &operator--(); //prefix

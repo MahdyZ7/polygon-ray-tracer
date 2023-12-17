@@ -29,7 +29,7 @@
 	}
 	float Vector::length()
 	{
-		return sqrt(x * x + y * y + z * z);
+		return sqrt((x * x + y * y + z * z).toFloat());
 	}
 	Vector Vector::normalize()
 	{
@@ -38,7 +38,7 @@
 	}
 	float Vector::dot(Vector v)
 	{
-		return x * v.x + y * v.y + z * v.z;
+		return (x * v.x + y * v.y + z * v.z).toFloat();
 	}
 	Vector Vector::cross(Vector v)
 	{
@@ -47,7 +47,7 @@
 	}
 	float Vector::dot(Vector v, Vector w)
 	{
-		return v.x * w.x + v.y * w.y + v.z * w.z;
+		return (v.x * w.x + v.y * w.y + v.z * w.z).toFloat();
 	}
 	Vector Vector::cross(Vector v, Vector w)
 	{
@@ -56,7 +56,7 @@
 	}
 	float Vector::length2()
 	{
-		return x * x + y * y + z * z;
+		return (x * x + y * y + z * z).toFloat();
 	}
 	Vector Vector::sNormalize(Vector v)
 	{

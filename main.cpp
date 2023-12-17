@@ -65,9 +65,9 @@ void key_press(sf::RenderWindow *window)
 
 void compute_pixel(int i, int j, Data dt) {
    Vector color = trace_tri(dt.dir[j][i], dt);
-   dt.pixels[i * WIN_WIDTH * 4 + j * 4 + 0] = (char)color.x;
-   dt.pixels[i * WIN_WIDTH * 4 + j * 4 + 1] = (char)color.y;
-   dt.pixels[i * WIN_WIDTH * 4 + j * 4 + 2] = (char)color.z;
+   dt.pixels[i * WIN_WIDTH * 4 + j * 4 + 0] = (char)(color.x).toInt();
+   dt.pixels[i * WIN_WIDTH * 4 + j * 4 + 1] = (char)(color.y).toInt();
+   dt.pixels[i * WIN_WIDTH * 4 + j * 4 + 2] = (char)(color.z).toInt();
 }
 
 

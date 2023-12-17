@@ -171,6 +171,18 @@ Fixed Fixed::operator/(Fixed const &alu) const
 	return (temp);
 }
 
+Fixed Fixed::operator+(float const &alu) const
+{
+	Fixed temp;
+	temp.num = this->num + (int) roundf(alu * (1 << frac));
+	return (temp);
+}
+
+Fixed Fixed::operator+=(float const &alu)
+{
+	this->num = this->num + (int) roundf(alu * (1 << frac));
+	return (*this);
+}
 // non memeber functions
 
 Fixed	Fixed::max(Fixed const &a, Fixed const &b)
