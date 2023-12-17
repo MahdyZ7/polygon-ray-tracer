@@ -7,9 +7,9 @@
 class Vector {
 
 	public:
-		Fixed x;
-		Fixed y;
-		Fixed z;
+		float x;
+		float y;
+		float z;
 
 	Vector(float x, float y, float z): x(x), y(y), z(z) {}
 	Vector(float x, float y): x(x), y(y), z(0) {}
