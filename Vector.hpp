@@ -3,12 +3,13 @@
 
 #include <cmath>
 #include <iostream>
+#include "Fixed.hpp"
 class Vector {
 
 	public:
-		float x;
-		float y;
-		float z;
+		Fixed x;
+		Fixed y;
+		Fixed z;
 
 	Vector(float x, float y, float z): x(x), y(y), z(z) {}
 	Vector(float x, float y): x(x), y(y), z(0) {}
