@@ -17,13 +17,13 @@ Vector	vec_to_color(Vector vec, Vector &mul)
 void	add_spot_light(
 	Data &data, Vector &normal, Vector &light_vec, Vector &i)
 {
-	i.x += data.spotlight.brightness * (data.spotlight.color.x).toFloat()
+	i.x += data.spotlight.brightness * (data.spotlight.color.x)
 		* Vector::dot(normal, light_vec) / (normal.length()
 			* light_vec.length());
-	i.y += data.spotlight.brightness * (data.spotlight.color.y).toFloat()
+	i.y += data.spotlight.brightness * (data.spotlight.color.y)
 		* Vector::dot(normal, light_vec) / (normal.length()
 			* light_vec.length());
-	i.z += data.spotlight.brightness * (data.spotlight.color.z).toFloat()
+	i.z += data.spotlight.brightness * (data.spotlight.color.z)
 		* Vector::dot(normal, light_vec) / (normal.length()
 			* light_vec.length());
 }

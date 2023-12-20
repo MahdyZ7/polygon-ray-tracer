@@ -20,6 +20,7 @@
 // #define WIN_WIDTH 600
 // #define WIN_HIGHT 400
 #define SMALL_NUM 0.0001
+#define INF 8000000
 
 struct	Data;
 
@@ -46,14 +47,14 @@ struct Camera
 
 struct AmbLight
 {
-	float	brightness;
+	Fixed	brightness;
 	Vector	color;
 };
 
 struct SpotLight
 {
 	Vector	pos;
-	float	brightness;
+	Fixed	brightness;
 	Vector	color;
 };
 
@@ -69,7 +70,7 @@ struct	Data
 };
 
 Vector	trace_tri(Vector &dir, Data &data);
-float intersect_RayTriangle(Vector &origin, Vector &dir, Triangle &T, Vector &I);
+Fixed intersect_RayTriangle(Vector &origin, Vector &dir, Triangle &T, Vector &I);
 Vector	compute_color_to_vec(
 Vector &dir, Triangle *tri, Data &data, Vector hit_point);
 bool hit_other_object(Vector hit_point, Vector light_vec, Data &data);

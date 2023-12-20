@@ -18,7 +18,7 @@ void add_tri(Data &data)
 
 void hardcoded_data(Data &data)
 {
-	data.amblight.brightness = 0.3;
+	data.amblight.brightness = Fixed(0.3f);
 	data.amblight.color = Vector(0.6, 0.6 , 1);
 	data.spotlight.brightness = 1;
 	data.spotlight.color = Vector(1, 0.5 , 0);
@@ -97,6 +97,10 @@ int main() {
 		std::cout << "line: " << i << std::endl;
 		for (auto &th : threads)
 			th.join();
+		texture.update(dt.pixels);
+		sf::Sprite sprite(texture);
+		window.draw(sprite);
+		window.display();
 	}
 
 

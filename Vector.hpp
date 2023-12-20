@@ -22,17 +22,17 @@ class Vector {
 	Vector	operator=(const Vector &other);
 	Vector	operator+(Vector v);
 	Vector	operator-(Vector v);
-	Vector	operator*(float s);
-	Vector	operator/(float s);
+	Vector	operator*(Fixed s);
+	Vector	operator/(Fixed s);
 	bool	operator==(const Vector &v) const;
-	float length();
+	Fixed length();
 	Vector normalize();
-	float dot(Vector v);
+	Fixed dot(Vector v);
 	Vector cross(Vector v);
-	static float dot(Vector v, Vector w);
+	static Fixed dot(Vector v, Vector w);
 	static Vector cross(Vector v, Vector w);
 	static Vector sNormalize(Vector v);
-	float length2();
+	Fixed length2();
 	
 };
 

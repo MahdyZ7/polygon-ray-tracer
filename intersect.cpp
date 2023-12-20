@@ -1,35 +1,35 @@
 #include "raytracing.hpp"
 
-float intersect_RayTriangle(Vector &origin, Vector &dir, Triangle &T, Vector &I)
+Fixed intersect_RayTriangle(Vector &origin, Vector &dir, Triangle &T, Vector &I)
 {
 	Vector    u, v, n;             // triangle vectors
 	Vector    ray, w0, w;          // ray vectors
-	float     r, a, b;             // params to calc ray-plane intersect
+	Fixed     r, a, b;             // params to calc ray-plane intersect
 
 	// get triangle edge vectors and plane normal
 	u = T.v1 - T.v0;
 	v = T.v2 - T.v0;
 	n = Vector::cross(u, v);             // cross product
 	if (n.length() == 0)           // triangle is degenerate
-		return INFINITY;                 // do not deal with this case
+		return INF;                 // do not deal with this case
 
 	w0 = origin - T.v0;
-	a = -Vector::dot(n,w0);
+	a = a - Vector::dot(n,w0);
 	b = Vector::dot(n,dir);
-	if (fabs(b) < SMALL_NUM) {     // ray is parallel to triangle plane
+	if (b < Fixed(0.0001f) && b > Fixed(-0.0001f)) {     // ray is parallel to triangle plane
 		if (a == 0)                // ray lies in triangle plane
 			return 0;
-		else return INFINITY;             // ray disjoint from plane
+		else return INF;             // ray disjoint from plane
 	}
 	// get intersect point of ray with triangle plane
 	r = a / b;
-	if (r < 0.0)                   // ray goes away from triangle
-		return INFINITY;                  // => no intersect
+	if (r < 0)                   // ray goes away from triangle
+		return INF;                  // => no intersect
 
 	I = origin + dir * r;           // intersect point of ray and plane
 
 	// is I inside T?
-	float    uu, uv, vv, wu, wv, D;
+	Fixed    uu, uv, vv, wu, wv, D;
 	uu = Vector::dot(u,u);
 	uv = Vector::dot(u,v);
 	vv = Vector::dot(v,v);
@@ -39,13 +39,13 @@ float intersect_RayTriangle(Vector &origin, Vector &dir, Triangle &T, Vector &I)
 	D = uv * uv - uu * vv;
 
 	// get and test parametric coords
-	float s, t;
+	Fixed s, t;
 	s = (uv * wv - vv * wu) / D;
-	if (s < 0.0 || s > 1.0)        // I is outside T
-		return INFINITY;
+	if (s < 0 || s > 1)        // I is outside T
+		return INF;
 	t = (uv * wu - uu * wv) / D;
-	if (t < 0.0 || (s + t) > 1.0)  // I is outside T
-		return INFINITY;
+	if (t < 0 || (s + t) > 1)  // I is outside T
+		return INF;
 
 	return r;                      // I is in T
 }
@@ -53,12 +53,12 @@ float intersect_RayTriangle(Vector &origin, Vector &dir, Triangle &T, Vector &I)
 Triangle	*find_closest_tri(
 		Data &data, Vector &dir, Vector &hit_point)
 {
-	float		temp_t;
+	Fixed		temp_t;
 	Triangle	*closest_tri;
-	float		closest_r;
+	Fixed		closest_r;
 
 	closest_tri = NULL;
-	closest_r = INFINITY;
+	closest_r = INF;
 	for (std::vector<Triangle>::iterator it = data.triangles.begin();
 		it != data.triangles.end(); ++it)
 	{

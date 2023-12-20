@@ -15,11 +15,11 @@
 	{
 		return Vector(x - v.x, y - v.y, z - v.z);
 	}
-	Vector Vector::operator*(float s)
+	Vector Vector::operator*(Fixed s)
 	{
 		return Vector(x * s, y * s, z * s);
 	}
-	Vector Vector::operator/(float s)
+	Vector Vector::operator/(Fixed s)
 	{
 		return Vector(x / s, y / s, z / s);
 	}
@@ -27,40 +27,43 @@
 	{
 		return (x == v.x && y == v.y && z == v.z);
 	}
-	float Vector::length()
+
+	Fixed Vector::length()
 	{
-		return sqrt((x * x + y * y + z * z).toFloat());
+		// Fixed  length2 = x * x + y * y + z * z;
+		// return sqrtf(length2);
+		return sqrtf((x * x + y * y + z * z).toFloat());
 	}
 	Vector Vector::normalize()
 	{
-		float l = length();
+		Fixed l = length();
 		return Vector(x / l, y / l, z / l);
 	}
-	float Vector::dot(Vector v)
+	Fixed Vector::dot(Vector v)
 	{
-		return (x * v.x + y * v.y + z * v.z).toFloat();
+		return (x * v.x + y * v.y + z * v.z);
 	}
 	Vector Vector::cross(Vector v)
 	{
 		return Vector(y * v.z - z * v.y, z * v.x
 			- x * v.z, x * v.y - y * v.x);
 	}
-	float Vector::dot(Vector v, Vector w)
+	Fixed Vector::dot(Vector v, Vector w)
 	{
-		return (v.x * w.x + v.y * w.y + v.z * w.z).toFloat();
+		return (v.x * w.x + v.y * w.y + v.z * w.z);
 	}
 	Vector Vector::cross(Vector v, Vector w)
 	{
 		return Vector(v.y * w.z - v.z * w.y, v.z * w.x
 			- v.x * w.z, v.x * w.y - v.y * w.x);
 	}
-	float Vector::length2()
+	Fixed Vector::length2()
 	{
-		return (x * x + y * y + z * z).toFloat();
+		return (x * x + y * y + z * z);
 	}
 	Vector Vector::sNormalize(Vector v)
 	{
-		float l = v.length();
+		Fixed l = v.length();
 		return Vector(v.x / l, v.y / l, v.z / l);
 	}
 	

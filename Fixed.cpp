@@ -171,16 +171,9 @@ Fixed Fixed::operator/(Fixed const &alu) const
 	return (temp);
 }
 
-Fixed Fixed::operator+(float const &alu) const
+Fixed Fixed::operator+=(Fixed const &alu)
 {
-	Fixed temp;
-	temp.num = this->num + (int) roundf(alu * (1 << frac));
-	return (temp);
-}
-
-Fixed Fixed::operator+=(float const &alu)
-{
-	this->num = this->num + (int) roundf(alu * (1 << frac));
+	this->num += alu.num;
 	return (*this);
 }
 // non memeber functions
