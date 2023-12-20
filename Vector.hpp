@@ -3,7 +3,6 @@
 
 #include <cmath>
 #include <iostream>
-#include "Fixed.hpp"
 class Vector {
 
 	public:

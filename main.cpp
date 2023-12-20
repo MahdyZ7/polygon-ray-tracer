@@ -97,6 +97,10 @@ int main() {
 		std::cout << "line: " << i << std::endl;
 		for (auto &th : threads)
 			th.join();
+		// texture.update(dt.pixels);
+		// sf::Sprite sprite(texture);
+		// window.draw(sprite);
+		// window.display();
 	}
 
 
